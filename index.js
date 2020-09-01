@@ -206,6 +206,9 @@ const artists = [
 /* Task 1: Practice accessing data above by console.log-ing following items:
 
 (1) Name of the first artist (0th index) in the array
+
+
+
 (2) Bio of the third artist (2nd index) in the array */
 
 
@@ -222,21 +225,52 @@ const artists = [
  * For example, if getArtistByIndex is invoked with the artists dataset and the number 0,
  * it will return `The artist at index 0 is Amedeo Modigliani`.
 */
-function getArtistByIndex(array, index) {
-    /* code here */
-  }
-  
-  /**
+
+console.log(artists[0])
+
+console.log(artists[2].bio)
+
+const updatedArray = artists.map(a=> {
+  if(a.id === 8  ){
+
+    a.name="Vincent Van Gogh"
+    return a 
+
+    } 
+    else {
+      return a
+    }
+})
+
+  console.log(updatedArray)
+
+
+
 
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/* Code here */){
+function get20s(array){
 
-  /* Code here */
+  const filtered = []
+  
+  for (let i = 0; i < array.length; i++ ) {
+
+    const y =array[i].years.split(" ") // ["born", "-", "death"]
+
+
+    if (parseInt(y[0], 10) >= 1900 && parseInt(y[2], 10) <= 2000) {
+
+      filtered.push(array[i].name)
+    }
+  }
+
+  return filtered
+
 
 }
 
+console.log(get20s(artists))
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -248,10 +282,15 @@ function get20s(/* Code here */){
  * 
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.  
 */
-function removeArtist(/*code here*/) {
-    /* code here */
-  }
+function removeArtist(array, index) {
+
+  array.splice(0, 1);
+  removeArtist(artists, 0);   
+
+  console.log(array.length)
   
+}
+ 
  
 
 /**
@@ -267,12 +306,12 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(/* Code here */){
+function addArtist(array, Id, Name, Years, Genre, Nationality, Bio,){
+array.push({Id, Name, Years, Genre, Nationality, Bio,});
+return array; 
+}
 
-    /* Code here */
-
-  }
-
+console.log(addArtist(artists, '21', 'LeeFormento','November-present', '2000s Hop-hop RNB', 'USA', 'Lee Formento is originally from the Philippines')) ;
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
     (1) artists array 
@@ -281,11 +320,21 @@ and returns an array with names of artists who painted more than 100 paintings.
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
-function lotsOfArt(/* Code here */){
+function lotsOfArt(array, ){
 
-  /* Code here */
+  const filtered = []
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].paintings > 100) {
+      filtered.push(array[i].name)
+    }
+  }
+
+  return filtered
 
 }
+
+console.log(lotsOfArt(artists))
 
 
 
@@ -329,3 +378,4 @@ function randomize(/* Code here */){
 
 
  /* STRETCH 3: Use advanced array methods (.map, .reduce, .filer) to refactor your MVP code (create an array of all artists born in the 1900s with .filter, for example) */
+///////
